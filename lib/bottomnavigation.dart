@@ -16,9 +16,10 @@ class MyNavigationBar extends StatefulWidget {
 class _MyNavigationBarState extends State<MyNavigationBar > {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
+
+    Requirement(),
     Camp(),
     Noti(),
-    Requirement()
 
   ];
 
@@ -51,7 +52,7 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.ac_unit_rounded),
-              label: 'Needs',
+              label: 'Camp',
               backgroundColor:Color(0xFF5F9EA0),
             ),
           ],

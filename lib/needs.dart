@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-// import 'package:disaster/needs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,38 +7,41 @@ import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'constant.dart';
-import 'needs.dart';
 
-class Requirement extends StatefulWidget {
-  const Requirement({Key? key}) : super(key: key);
+class Needs extends StatefulWidget {
+  String? id;
+   Needs({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<Requirement> createState() => _RequirementState();
+  State<Needs> createState() => _NeedsState();
 }
 
-class _RequirementState extends State<Requirement> {
+class _NeedsState extends State<Needs> {
   Future<dynamic> getData() async {
-    var response = await get(Uri.parse('${Con.url}view-categories.php'));
+    var data ={
+      "id":widget.id,
+    };
+    var response = await post(Uri.parse('${Con.url}view-needs.php'),body: data);
     var res = jsonDecode(response.body);
-    print('res>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$res');
+    print('res>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$res');
     return res;
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(backgroundColor: Color(0xFF5F9EA0),
-       actions: [
-         Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: InkWell(
-               onTap:(){
-                 Fluttertoast.showToast(msg: 'Logout successfully...');
-                 SystemNavigator.pop();
-               },
-               child: Icon(Icons.logout)),
-         )
-       ],
-        ),
+      appBar: AppBar(backgroundColor: Color(0xFF5F9EA0),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+                onTap:(){
+                  Fluttertoast.showToast(msg: 'Logout successfully...');
+                  SystemNavigator.pop();
+                },
+                child: Icon(Icons.logout)),
+          )
+        ],
+      ),
       body: Column(
         children: [
           FutureBuilder(
@@ -51,20 +53,10 @@ class _RequirementState extends State<Requirement> {
                     child: ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: (){
-                             Navigator.push(context, MaterialPageRoute(builder: (context) {
-                               return Needs(id: snapshot.data![index]['category_id']);
-                             },));
-                          },
-                          child: Card(
-                            elevation: 3,
-                            child: ListTile(
-                              title: Text(snapshot.data![index]['category']),
-                              // trailing: Text(snapshot.data![index]['quantity']),
-                              // trailing: Text('date'),
-                            ),
-                          ),
+                        return ListTile(
+                          title: Text(snapshot.data![index]['material_required']),
+                          trailing: Text(snapshot.data![index]['quantity']),
+                          // trailing: Text('date'),
                         );
                       },
 
