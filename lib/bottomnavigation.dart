@@ -40,19 +40,19 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
           items: const <BottomNavigationBarItem>[
 
             BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: Icon(Icons.production_quantity_limits),
+                label: 'Needs',
                 backgroundColor: Color(0xFF5F9EA0)
             ),
 
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_active),
-              label: 'Notification',
+              icon: Icon(Icons.home),
+              label: 'Camp',
               backgroundColor:Color(0xFF5F9EA0),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.ac_unit_rounded),
-              label: 'Camp',
+              icon: Icon(Icons.notifications),
+              label: 'Notification',
               backgroundColor:Color(0xFF5F9EA0),
             ),
           ],

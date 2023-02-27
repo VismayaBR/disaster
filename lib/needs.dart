@@ -48,7 +48,15 @@ class _NeedsState extends State<Needs> {
 
               future: getData(),
               builder: (context,snapshot) {
-                if(snapshot.hasData){
+                if(!snapshot.hasData){
+                    return Center(child: const CircularProgressIndicator());
+                  }
+                  else if(snapshot .data[0]['message']=='failed') {
+                    return Center(child: Text('No Items added'));
+                  }
+
+
+                  
                   return Expanded(
                     child: ListView.builder(
                       itemCount: snapshot.data.length,
@@ -62,118 +70,119 @@ class _NeedsState extends State<Needs> {
 
                     ),
                   );
-                }
-                else if(snapshot.connectionState==ConnectionState.waiting){
-                  return Center(child: CircularProgressIndicator(),);
-                }
-                else{
-                  return Center(child: Text('No Categories Added'));
-                }
+                
+                
+                // else if(snapshot.connectionState==ConnectionState.waiting){
+                //   return Center(child: CircularProgressIndicator(),);
+                // }
+                // else{
+                //   return Center(child: Text('No Categories Added'));
+                // }
 
               }
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: (){
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: const Text("Donate Here"),
-                        content: SizedBox(
-                          height: 60,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: InkWell(
+          //         onTap: (){
+          //           showDialog(
+          //             context: context,
+          //             builder: (ctx) => AlertDialog(
+          //               title: const Text("Donate Here"),
+          //               content: SizedBox(
+          //                 height: 60,
+          //                 child: Column(
+          //                   children: [
+          //                     Row(
+          //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                children: [
-                                  Text('Gpay  :          1234567890'),
-                                ],
-                              ),
+          //                       children: [
+          //                         Text('Gpay  :          1234567890'),
+          //                       ],
+          //                     ),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Bank A/C  :  SBI000123456790'),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('IFSC  :           SBI0000XX'),
-                                ],
-                              ),
+          //                     Row(
+          //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //                       children: [
+          //                         Text('Bank A/C  :  SBI000123456790'),
+          //                       ],
+          //                     ),
+          //                     Row(
+          //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //                       children: [
+          //                         Text('IFSC  :           SBI0000XX'),
+          //                       ],
+          //                     ),
 
-                            ],
-                          ),
-                        ),
+          //                   ],
+          //                 ),
+          //               ),
 
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(ctx).pop();
-                            },
-                            child: Container(
-                              color: Colors.teal,
-                              padding: const EdgeInsets.all(14),
-                              child: const Text("OK",style: TextStyle(color: Colors.black),),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.teal,
-                    ),
-                    height: 35,width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Donate  '),
-                        Icon(Icons.account_balance)
-                      ],
-                    ),
+          //               actions: <Widget>[
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(ctx).pop();
+          //                   },
+          //                   child: Container(
+          //                     color: Colors.teal,
+          //                     padding: const EdgeInsets.all(14),
+          //                     child: const Text("OK",style: TextStyle(color: Colors.black),),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(50),
+          //             color: Colors.teal,
+          //           ),
+          //           height: 35,width: 120,
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text('Donate  '),
+          //               Icon(Icons.account_balance)
+          //             ],
+          //           ),
 
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: (){
+          //         ),
+          //       ),
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: InkWell(
+          //         onTap: (){
 
 
 
-                    print('object');
-                    launchUrl(Uri.parse('tel:1234567890'),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.teal,
-                    ),
-                    height: 35,width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Contact  '),
-                        Icon(Icons.phone)
-                      ],
-                    ),
+          //           print('object');
+          //           launchUrl(Uri.parse('tel:1234567890'),
+          //           );
+          //         },
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(50),
+          //             color: Colors.teal,
+          //           ),
+          //           height: 35,width: 120,
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text('Contact  '),
+          //               Icon(Icons.phone)
+          //             ],
+          //           ),
 
-                  ),
-                ),
-              ),
-            ],
-          )
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // )
         ],
       ),
 
