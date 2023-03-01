@@ -3,6 +3,7 @@ import 'package:disaster/requirements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'amount.dart';
 import 'camp.dart';
 import 'notification.dart';
 
@@ -18,6 +19,7 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
   static const List<Widget> _widgetOptions = <Widget>[
 
     Requirement(),
+    Amount(),
     Camp(),
     Noti(),
 
@@ -44,7 +46,11 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
                 label: 'Needs',
                 backgroundColor: Color(0xFF5F9EA0)
             ),
-
+            BottomNavigationBarItem(
+                icon: Icon(Icons.currency_rupee),
+                label: 'Donation',
+                backgroundColor: Color(0xFF5F9EA0)
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Camp',
